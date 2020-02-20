@@ -1,1 +1,4 @@
 ./idea
+./frontend/
+./backend/.env.local
+backend/settings/__pycache__/
