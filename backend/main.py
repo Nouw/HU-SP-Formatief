@@ -1,8 +1,7 @@
 from settings.database import createConnection
 
-database = createConnection().huwebshop
+database = createConnection()
 
-table = database.sessions
+# table = database.products
 
-for x in table.find():
-    print(x)
+print(database)
