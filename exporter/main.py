@@ -1,7 +1,6 @@
-from settings.database import createConnection
+from exporter.settings import createConnectionMongoDB
+database = createConnectionMongoDB()
 
-database = createConnection()
+table = database.products
 
-# table = database.products
-
-print(database)
+print(table)
