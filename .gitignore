@@ -1,0 +1,5 @@
+.DS_Store
+.idea
+./frontend/
+exporter/.env.local
+exporter/settings/__pycache__/
