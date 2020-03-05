@@ -1,5 +1,5 @@
-from .create_producten_table import createTableProducten
-from .create_category_table import createTableCategory
+# from .create_producten_table import createTableProducten
+# from .create_producten_table import createTableCategory
 #
 #
 # def __init__(self):

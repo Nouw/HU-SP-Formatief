@@ -4,6 +4,10 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
+# Set the sys path
+import sys
+
+sys.path = ['', '..'] + sys.path[1:]
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -17,7 +21,9 @@ fileConfig(config.config_file_name)
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = None
+# TODO: Maybe loop through all the files in migrations and add them to the array :)
+from exporter.migrations import create_producten_table
+target_metadata = [create_producten_table.Base.metadata]
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
