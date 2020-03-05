@@ -15,7 +15,7 @@ def create_return_filter(allow, block) -> dict:
 
 
 #   Runs the export script and creates a csv file
-def run_export(collection_name, field_names,
+def execute_export(collection_name, field_names,
                sample_size=None, db_name='huwebshop', mongo_ip='mongodb://localhost:27017/'):
     #   Setup connection to MongoDB
     myclient = pymongo.MongoClient(mongo_ip)
@@ -34,7 +34,13 @@ def run_export(collection_name, field_names,
     print("Writing to {}...".format(filename))
     with open(filename, 'w') as file:
         writer = csv.DictWriter(file, field_names)
-        writer.writerows(finds)
+        writer.writeheader()
+        i = 0
+        for document in finds:
+            writer.writerow(document)
+            i += 1
+            if i % 10000 == 0:
+                print("Written {} documents.".format(i))
 
     print("Done exporting.")
 
@@ -42,5 +48,5 @@ def run_export(collection_name, field_names,
 if __name__ == '__main__':
     m_collection_name = 'sessions'
     m_field_names = ('_id', 'session_start', 'session_end')
-    m_sample_size = 10
-    run_export(m_collection_name, m_field_names, m_sample_size)
+    m_sample_size = 100
+    execute_export(m_collection_name, m_field_names, m_sample_size)
