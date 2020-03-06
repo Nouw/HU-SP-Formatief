@@ -3,3 +3,4 @@
 ./frontend/
 exporter/.env.local
 exporter/settings/__pycache__/
+exporter/__pycache__/
