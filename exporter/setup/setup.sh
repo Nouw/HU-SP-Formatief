@@ -2,3 +2,4 @@
 python -m pip install mysql-connector
 python -m pip install pymongo
 python -m pip install mysqlclient
+python -m pip install alembic
