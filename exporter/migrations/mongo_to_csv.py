@@ -7,16 +7,30 @@ def create_return_filter(allow, block) -> dict:
     if '_id' not in allow:
         block = list(block) + ['_id']
     return_filter = {}
-    for x in allow:
-        return_filter[x] = True
-    for x in block:
-        return_filter[x] = False
+    for field_name in allow:
+        return_filter[field_name] = True
+    for field_name in block:
+        return_filter[field_name] = False
     return return_filter
+
+
+#   Creates the header for the csv with translation, for example translation={'_id': 'ID'},
+#   so that field name '_id' becomes 'ID' in the header
+def create_header(field_names, translation={}):
+    header = ''
+    for i in range(len(field_names)):
+        if field_names[i] in translation.keys():
+            header = header + translation[field_names[i]]
+        else:
+            header = header + field_names[i]
+        if i + 1 < len(field_names):
+            header = header + ', '
+    return header + '\n'
 
 
 #   Runs the export script and creates a csv file
 def execute_export(collection_name, field_names,
-               sample_size=None, db_name='huwebshop', mongo_ip='mongodb://localhost:27017/'):
+                   sample_size=None, translation={}, db_name='huwebshop', mongo_ip='mongodb://localhost:27017/'):
     #   Setup connection to MongoDB
     myclient = pymongo.MongoClient(mongo_ip)
     db = myclient[db_name]
@@ -30,14 +44,22 @@ def execute_export(collection_name, field_names,
     print("Data received...")
 
     #   Write as csv file
-    filename = collection_name + '.csv'
+    filename = 'csvs/{}.csv'.format(collection_name)
     print("Writing to {}...".format(filename))
     with open(filename, 'w') as file:
+        #   Write header
+        file.write(create_header(field_names, translation))
+        #   Write values
         writer = csv.DictWriter(file, field_names)
-        writer.writeheader()
         i = 0
         for document in finds:
+            document: dict
+            couldnt_find = set(field_names).difference(set(document.keys()))
+            if len(couldnt_find) > 0:
+                print("Couldn't find {} in {} id: {}".format(couldnt_find, collection_name, document['_id']))
+
             writer.writerow(document)
+            
             i += 1
             if i % 10000 == 0:
                 print("Written {} documents.".format(i))
