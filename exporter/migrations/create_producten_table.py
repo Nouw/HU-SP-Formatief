@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Boolean, String, Integer, func, Text
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
 
 Base = declarative_base()
 
@@ -30,7 +31,7 @@ class Products(Base):
     type = Column(String(255))
     type_of_hair_care = Column(String(255))
     type_of_hair_coloring = Column(String(255))
-    test = Column(Integer())
+    # test = relationship("RecommendedBefore", secondary=)
 
     def __repr__(self):
         return 'id: {}'.format(self.id_pk)

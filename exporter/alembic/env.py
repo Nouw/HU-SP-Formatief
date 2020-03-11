@@ -22,8 +22,9 @@ fileConfig(config.config_file_name)
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 # TODO: Maybe loop through all the files in migrations and add them to the array :)
-from exporter.migrations import create_producten_table
-target_metadata = [create_producten_table.Base.metadata]
+from exporter.migrations import create_producten_table, create_profiles_table, create_sessions_table, create_recommended_before_table, create_buids_table, create_orders_table, create_orders_products_table
+target_metadata = [create_producten_table.Base.metadata, create_profiles_table.Base.metadata, create_sessions_table.Base.metadata, create_recommended_before_table.Base.metadata,
+                   create_buids_table.Base.metadata, create_orders_table.Base.metadata, create_orders_products_table.Base.metadata]
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
