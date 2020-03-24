@@ -7,7 +7,7 @@ Base = declarative_base()
 
 class Products(Base):
     __tablename__ = 'products'
-    id_pk = Column(Integer(), primary_key=True)
+    id = Column(String(255), primary_key=True)
     name = Column(String(255))
     description = Column(Text)
     brand = Column(String(255))
@@ -31,7 +31,6 @@ class Products(Base):
     type = Column(String(255))
     type_of_hair_care = Column(String(255))
     type_of_hair_coloring = Column(String(255))
-    # test = relationship("RecommendedBefore", secondary=)
 
     def __repr__(self):
-        return 'id: {}'.format(self.id_pk)
+        return 'id: {}'.format(self.id)

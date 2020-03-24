@@ -8,8 +8,7 @@ Base = declarative_base()
 
 class Profiles(Base):
     __tablename__ = "profiles"
-    id_pk = Column(Integer(), primary_key=True)
-    id = Column(String(255))
+    id = Column(String(255),  primary_key=True)
     first_order = Column(DateTime)
     latest_order = Column(DateTime)
     order_amount = Column(Integer)
@@ -17,4 +16,4 @@ class Profiles(Base):
     # buid = relationship(Buids)
 
     def __repr__(self):
-        return 'id: {}'.format(self.id_pk)
+        return 'id: {}'.format(self.id)

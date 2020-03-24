@@ -4,3 +4,4 @@
 exporter/.env.local
 exporter/settings/__pycache__/
 exporter/__pycache__/
+exporter/CSV/csvFiles/

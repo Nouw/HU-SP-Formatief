@@ -29,6 +29,9 @@ Hoe kan ik env variables gebruiken in .ini bestanden?
 ## Notes
 Misschien hier even naar kijken om de data van MongoDB naar MySQL te zetten: https://docs.sqlalchemy.org/en/13/orm/tutorial.html
 
+Command om de database te updaten
+`alembic revision --autogenerate -m "message'`
+
 ##Hoe werkt alembic?
 Maak een baseline document aan met alle tabellen die je wilt toevoegen aan het begin.
 Daarna kan je models maken in `exporter/migrations/`
